@@ -2,9 +2,10 @@ import random
 import base64
 import html
 import io
+import re
 import json
 import logging
-import settings as settings
+import settings
 import sd_api
 from telegram import Update
 from telegram.ext import ContextTypes
