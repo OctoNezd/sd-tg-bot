@@ -43,7 +43,7 @@ async def prompt(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         await update.message.reply_text("you hadn't specified a prompt.")
         return
     query = " ".join(context.args)
-    may_be_nsfw = POTENTIAL_NSFW_RE.match(query)
+    may_be_nsfw = bool(POTENTIAL_NSFW_RE.match(query))
     async with await sd_api.get_session(error_on_queue=True) as session:
         await update.message.reply_chat_action("upload_photo")
         async with session.post(
