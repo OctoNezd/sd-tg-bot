@@ -34,7 +34,7 @@ async def rand_print(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         except sd_api.QueueIsBusy:
             pass
 
-POTENTIAL_NSFW_RE = re.compile(r"(nsfw|sex|naked|breast|pussy|vagina|cock|dick|penis|futa)")
+POTENTIAL_NSFW_RE = re.compile(r".*(nsfw|sex|naked|breast|pussy|vagina|cock|dick|penis|futa).*")
 
 async def prompt(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if update.message is None or context.args is None:
