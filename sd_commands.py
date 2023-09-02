@@ -34,7 +34,11 @@ async def rand_print(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
         except sd_api.QueueIsBusy:
             pass
 
-POTENTIAL_NSFW_RE = re.compile(r".*(nsfw|sex|naked|breast|pussy|vagina|cock|dick|penis|futa).*")
+
+POTENTIAL_NSFW_RE = re.compile(
+    r".*(nsfw|sex|naked|breast|pussy|vagina|cock|dick|penis|futa|tit|honk|nude).*"
+)
+
 
 async def prompt(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if update.message is None or context.args is None:
@@ -58,7 +62,9 @@ async def prompt(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 cap = "\n".join(json.loads(data["info"])["infotexts"])
                 image = io.BytesIO(base64.b64decode(data["images"][0].split(",", 1)[0]))
                 image.seek(0)
-                await update.message.reply_photo(photo=image, caption=cap[:1024], has_spoiler=may_be_nsfw)
+                await update.message.reply_photo(
+                    photo=image, caption=cap[:1024], has_spoiler=may_be_nsfw
+                )
             else:
                 raise sd_api.SDError((await response.json())["errors"])
 
