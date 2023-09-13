@@ -76,7 +76,7 @@ def main() -> None:
     application.add_handler(
         MessageHandler(
             filters.TEXT & ~filters.COMMAND & chat_whitelist, sd_commands.rand_print
-        )
+        ), group=2
     )
 
     application.add_error_handler(error_handler)  # type: ignore
